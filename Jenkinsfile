@@ -29,7 +29,7 @@ pipeline {
                 branch 'production'  
             }
             steps {
-                '''
+                sh'''
                 echo "successfull"
                 '''
             }
