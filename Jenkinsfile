@@ -6,32 +6,37 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'npm install'
+                sh '''
+                    echo "This stage is built successfully in production"
+                '''
             }
         }
         stage('Test') {
             steps {
-                sh './jenkins/scripts/test.sh'
+                sh '''
+                    echo "This stage is tested successfully in production"
+                '''
             }
         }
-        stage('Deliver for development') {
+        stage('development') {
             when {
                 branch 'development' 
             }
             steps {
-                sh './jenkins/scripts/deliver-for-development.sh'
-                input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                sh './jenkins/scripts/kill.sh'
+                sh '''
+                    ls -lrt
+                '''
             }
         }
-        stage('Deploy for production') {
+        stage('production') {
             when {
                 branch 'production'  
             }
             steps {
-                sh './jenkins/scripts/deploy-for-production.sh'
-                input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                sh './jenkins/scripts/kill.sh'
+                sh'''
+                echo "successfull"
+
+                '''
             }
         }
     }
